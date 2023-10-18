@@ -20,7 +20,13 @@ namespace DaifukuFileDecoder1
 
         private void btnfileSec_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "Text File| *.log";
+            /*
+             ************Eğer veriler text dosyasına yazılmak istenirse 38. satırdan sonra aşağıdaki kodlardan uygun olan eklenmelidir.
+            //Environment.CurrentDirectory - Projenin exe'sinin bulunduğu Debug klasörünü bize verir.
+            //File.AppendAllText(Environment.CurrentDirectory + @"\yaz.txt", Dosyaicrk + "\n"); //Gelen verileri üzerine ekleyerek yazar.
+            //File.WriteAllText(Environment.CurrentDirectory + @"\yaz.txt", Dosyaicrk); //Gelen son veriyi texct dosyasının içini boşaltarak yazar.
+            */
+            openFileDialog1.Filter = "Text File| *.txt";
             OpenFileDialog Acdosya = new OpenFileDialog();
             Acdosya.ShowDialog();
             textBox1.Text = Acdosya.FileName;
@@ -29,10 +35,9 @@ namespace DaifukuFileDecoder1
 
             using (StreamReader Okunan = new StreamReader(Acdosya.FileName))
             {
-                //File.AppendAllText(@"C:\Users\ibrahim.benli\Desktop\yaz.txt", Environment.NewLine);
                 string Dosyaicrk = Okunan.ReadToEnd().Replace("\n", "");
                 Dosyaicrk = Dosyaicrk.Replace(" ", " ").Replace("\r", "");
-                
+
                 textBox2.Text = Dosyaicrk;
                 textBox4.Text = Dosyaicrk;
                 int Sti = -1, Adet = 8, Say = 1;
@@ -40,7 +45,7 @@ namespace DaifukuFileDecoder1
                 do
                 {
                     Sti++;
-                    if (Dosyaicrk.Length < Sti + 8) 
+                    if (Dosyaicrk.Length < Sti + 8)
                         return;
 
                     KntrlWrd1 = Dosyaicrk.Substring(Sti, Adet);
@@ -52,7 +57,7 @@ namespace DaifukuFileDecoder1
                         Sti += 32;
 
                         MessageBox.Show(KntrlWrd1 + " Adt: " + Adet + " Sti: " + Sti + " Say:" + Say);
-                        
+
                         Adet = 8;
                         Say++;
                     }
