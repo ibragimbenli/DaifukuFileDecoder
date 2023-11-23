@@ -36,7 +36,7 @@ namespace DaifukuFileDecoder1
             using (StreamReader Okunan = new StreamReader(Acdosya.FileName))
             {
                 string Dosyaicrk = Okunan.ReadToEnd().Replace("\n", "");
-                Dosyaicrk = Dosyaicrk.Replace(" ", " ").Replace("\r", "");
+                Dosyaicrk = Dosyaicrk.Replace("\r", "");
 
                 textBox2.Text = Dosyaicrk;
                 textBox4.Text = Dosyaicrk;
@@ -45,18 +45,18 @@ namespace DaifukuFileDecoder1
                 do
                 {
                     Sti++;
-                    if (Dosyaicrk.Length < Sti + 8)
+                    if (Dosyaicrk.Length < Sti + KntrlWrd2.Length)
                         return;
 
                     KntrlWrd1 = Dosyaicrk.Substring(Sti, Adet);
 
                     if (KntrlWrd1 == KntrlWrd2)
                     {
-                        Adet = Adet + 24;
+                        Adet += 24;
                         KntrlWrd1 = Dosyaicrk.Substring(Sti, Adet);
                         Sti += 32;
 
-                        MessageBox.Show(KntrlWrd1 + " Adt: " + Adet + " Sti: " + Sti + " Say:" + Say);
+                        MessageBox.Show(KntrlWrd1 + " Adt: " + Adet + " DosyaLength: " + Dosyaicrk.Length + " Sti: " + Sti + " Say:" + Say);
 
                         Adet = 8;
                         Say++;
